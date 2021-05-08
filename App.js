@@ -16,6 +16,10 @@ export default class App extends React.Component {
     this.setState({addTodoVisible: !this.state.addTodoVisible})
   }
 
+  renderList = list => {
+    return <TodoList list={list}/>
+  }
+
   render() {
     return ( 
       <View style={styles.container}>
@@ -31,11 +35,11 @@ export default class App extends React.Component {
           <View style={styles.divider} />
         </View>
 
-        <View style={{marginVertical: 48}}>
+        <View style={{marginVertical: 48, alignItems: 'center'}}>
           <TouchableOpacity style={styles.addList} onPress={() => this.toggleAddTodoVisible()}>
             <AntDesign name="plus" size={16} color={colors.blue}/>
           </TouchableOpacity>
-          <Text style={styles.add}>Add List</Text>
+          <Text style={styles.add}>Add</Text>
         </View>
 
         <View style={{height: 275, paddingLeft: 32}}>
@@ -43,9 +47,7 @@ export default class App extends React.Component {
           keyExtractor={item => item.name} 
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          renderItem={({item}) => (
-          <TodoList list={item}/>
-          )}
+          renderItem={({item}) => this.renderList(item)}
           />
         </View>
 
