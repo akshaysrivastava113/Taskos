@@ -22,7 +22,7 @@ class TodoList extends React.Component {
         return (
             <View>
                 <Modal animationType="slide" visible={this.state.showListVisible} onRequestClose={() => this.toggleListModal()} >
-                    <TodoModal list={list} onRequestClose={() => this.toggleListModal()}/>
+                    <TodoModal list={list} closeModal={() => this.toggleListModal()}/>
                 </Modal>
             <TouchableOpacity style={[styles.listContainer, {backgroundColor: list.color}]} onPress={() => this.toggleListModal()}>
                 <Text style={styles.listTitle} numberOfLines={1}>
@@ -70,5 +70,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: '700',
         color: colors.white 
-    }
+    },
+    
 })

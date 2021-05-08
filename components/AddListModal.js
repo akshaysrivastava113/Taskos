@@ -15,12 +15,9 @@ import tempData from '../tempData';
      createTodo = ()=> {
         const {name,color} = this.state;
 
-        tempData.push({
-            name,
-            color,
-            todos: []
-        })
+        const list = {name,color}
 
+        this.props.addList(list)
         this.setState({name: ""})
         this.props.closeModal();
 
@@ -37,9 +34,9 @@ import tempData from '../tempData';
          return (
              <KeyboardAvoidingView behavior="padding" style={styles.container}>
                  <TouchableOpacity style={{position: 'absolute', top: 64, right: 32}}>
-                    <AntDesign name="close" size={24} color={colors.black} onPress={this.props.closeModal}/>
+                    <AntDesign name="close" size={26} color={colors.black} onPress={this.props.closeModal}/>
                  </TouchableOpacity>
-                 <View style={{alignSelf: 'center', marginHorizontal: 32}}>
+                 <View style={{alignSelf: 'stretch', marginHorizontal: 32}}>
                      <Text style={styles.title}>Create Todo List</Text>
                      <TextInput style={styles.input} placeholder="List Name" 
                      onChangeText={text => this.setState({name: text})}/>

@@ -10,7 +10,12 @@ import AddListModal from './components/AddListModal';
 export default class App extends React.Component {
   state = {
     addTodoVisible: false,
+    lists: tempData
   };
+
+  addList = list => {
+
+  }
 
   toggleAddTodoVisible() {
     this.setState({addTodoVisible: !this.state.addTodoVisible})
@@ -27,7 +32,7 @@ export default class App extends React.Component {
         animationType="slide" 
         visible={this.state.addTodoVisible}
         onRequestClose={() => this.toggleAddTodoVisible()}>
-          <AddListModal closeModal={() => this.toggleAddTodoVisible()}/>
+          <AddListModal closeModal={() => this.toggleAddTodoVisible()} addList={this.addList}/>
         </Modal>
         <View style={{flexDirection: 'row'}}>
           <View style={styles.divider} />
@@ -43,7 +48,7 @@ export default class App extends React.Component {
         </View>
 
         <View style={{height: 275, paddingLeft: 32}}>
-          <FlatList data={tempData} 
+          <FlatList data={this.state.lists} 
           keyExtractor={item => item.name} 
           horizontal={true}
           showsHorizontalScrollIndicator={false}
