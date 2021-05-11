@@ -14,15 +14,23 @@ export default class App extends React.Component {
   };
 
   addList = list => {
-
+    this.setState({lists: [...this.state.lists,{...list, id: this.state.lists.length+1, todos: []}] })
   }
+
+  updateList = list => {
+    this.setState({
+      lists: this.state.lists.map(item => {
+        return item.id === list.id ? list : item;
+      })
+    });
+  };
 
   toggleAddTodoVisible() {
     this.setState({addTodoVisible: !this.state.addTodoVisible})
   }
 
   renderList = list => {
-    return <TodoList list={list}/>
+    return <TodoList list={list} updateList={this.updateList}/>
   }
 
   render() {
@@ -34,6 +42,7 @@ export default class App extends React.Component {
         onRequestClose={() => this.toggleAddTodoVisible()}>
           <AddListModal closeModal={() => this.toggleAddTodoVisible()} addList={this.addList}/>
         </Modal>
+
         <View style={{flexDirection: 'row'}}>
           <View style={styles.divider} />
           <Text style={styles.title}>Taskos</Text>

@@ -15,9 +15,9 @@ import tempData from '../tempData';
      createTodo = ()=> {
         const {name,color} = this.state;
 
-        const list = {name,color}
+        const list = {name,color};
 
-        this.props.addList(list)
+        this.props.addList(list);
         this.setState({name: ""})
         this.props.closeModal();
 
