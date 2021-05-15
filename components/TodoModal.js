@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
-import { Text, TouchableOpacity, View, StyleSheet, SafeAreaView, FlatList, KeyboardAvoidingView, TextInput } from 'react-native'
+import { Text, TouchableOpacity, View, StyleSheet, SafeAreaView, FlatList, KeyboardAvoidingView, TextInput, Keyboard } from 'react-native'
 import {AntDesign, Ionicons} from '@expo/vector-icons';
 import colors from '../Colors';
 
 export default class TodoModal extends React.Component {
     state={
         newTodo: ""
+    }
+
+    addTodo =() => {
+        let list = this.props.list;
+        list.todos.push({title: this.state.newTodo, completed: false});
+        this.props.updateList(list);
+        this.setState({newTodo: ""});
+        
+        Keyboard.dismiss();
     }
 
     toggleTodoCompleted = index => {
@@ -50,15 +59,15 @@ export default class TodoModal extends React.Component {
                     <FlatList 
                     data={list.todos}
                     renderItem={({item,index}) => this.renderTodo(item,index)}
-                    keyExtractor={item => item.title}
+                    keyExtractor={(_, index) => index.toString()}
                     contentContainerStyle={{paddingHorizontal: 32, paddingVertical: 64}}
                     showsVerticalScrollIndicator={false}
                     />
                 </View>
 
                 <View style={[styles.section, styles.footer]}>
-                    <TextInput style={[styles.input, {borderColor: list.color}]}/>
-                    <TouchableOpacity style={[styles.addTodo, {backgroundColor: list.color}]}>
+                    <TextInput style={[styles.input, {borderColor: list.color}]} onChangeText={text => this.setState({newTodo: text})} value={this.state.newTodo}/>
+                    <TouchableOpacity style={[styles.addTodo, {backgroundColor: list.color}]} onPress={() => this.addTodo()}>
                         <AntDesign name="plus" size={16} color={colors.white}/>
                     </TouchableOpacity>
                 </View>

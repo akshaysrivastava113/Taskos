@@ -26,7 +26,7 @@ class TodoList extends React.Component {
                 </Modal>
             <TouchableOpacity style={[styles.listContainer, {backgroundColor: list.color}]} onPress={() => this.toggleListModal()}>
                 <Text style={styles.listTitle} numberOfLines={1}>
-                    {list.name}
+                    {list.name} 
                 </Text>
                 <View>
                 <View style={{alignItems: 'center'}}>

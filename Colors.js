@@ -5,7 +5,8 @@
     white: "#FFFFFF",
     grey: "#5C5A5B",
     greyTwo: '#A4A4A4',
-    loghtGrey: '#CACACA'
+    loghtGrey: '#CACACA',
+    red: '#D85963'
 }
 
 export default colors;
